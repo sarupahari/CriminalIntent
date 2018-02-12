@@ -1,6 +1,7 @@
 package edu.wtamu.cis.cidm4385saru.criminalintent;
 
 
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,11 +16,14 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 
+
+
 /**
  * Created by sarup on 2/8/2018.
  */
 
-public class CrimeFragment extends Fragment{
+//public class CrimeFragment extends Fragment{
+public class CrimeFragment extends android.app.Fragment{
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
