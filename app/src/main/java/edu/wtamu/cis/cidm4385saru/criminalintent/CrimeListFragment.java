@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by sarup on 2/12/2018.
@@ -65,7 +67,9 @@ public class CrimeListFragment extends Fragment {
         public void bind(Crime crime){
             mCrime = crime;
             mTitleTextView.setText(mCrime.getTitle());
-            mDateTextView.setText(mCrime.getDate().toString());
+//            mDateTextView.setText(mCrime.getDate().toString());
+            SimpleDateFormat mTest = new SimpleDateFormat("EEE, MMM dd, yyyy", Locale.getDefault());
+            mDateTextView.setText(mTest.format(mCrime.getDate())); //"EEE, MMM d, ''yy",
             mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE : View.GONE);
 
         }
