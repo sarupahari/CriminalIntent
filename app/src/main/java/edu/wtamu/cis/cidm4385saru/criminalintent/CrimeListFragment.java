@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -22,6 +20,8 @@ import java.util.List;
 public class CrimeListFragment extends Fragment {
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
+
+    private int mLastUpdatedPosition = -1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +51,12 @@ public class CrimeListFragment extends Fragment {
             mAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mAdapter);
         } else{
-            mAdapter.notifyDataSetChanged();
+            if(mLastUpdatedPosition > -1){
+                mAdapter.notifyItemChanged(mLastUpdatedPosition);
+                mLastUpdatedPosition = -1;
+            }else{
+                mAdapter.notifyDataSetChanged();
+            }
         }
 
         mAdapter = new CrimeAdapter(crimes);
@@ -86,6 +91,7 @@ public class CrimeListFragment extends Fragment {
         @Override
         public void onClick(View view) {
             Intent intent = CrimeActivity. newIntent(getActivity(), mCrime.getId());
+            mLastUpdatedPosition = this.getAdapterPosition();
             startActivity(intent);
         }
     }
