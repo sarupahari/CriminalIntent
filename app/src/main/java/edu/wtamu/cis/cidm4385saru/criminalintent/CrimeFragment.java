@@ -36,6 +36,7 @@ public class CrimeFragment extends Fragment{
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckbox;
+    private Button mTimeButton;
 
     public static CrimeFragment newInstance (UUID crimeId){
         Bundle args = new Bundle();
@@ -89,6 +90,21 @@ public class CrimeFragment extends Fragment{
                 dialog.show(manager, DIALOG_DATE);
             }
         });
+
+
+        mTimeButton = (Button) v.findViewById(R.id.crime_date);
+        updateDate();
+        mTimeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                FragmentManager manager = getFragmentManager();
+                DatePickerFragment dialog = DatePickerFragment
+                        .newInstance(mCrime.getDate());
+                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+                dialog.show(manager, DIALOG_DATE);
+            }
+        });
+
 
         mSolvedCheckbox = (CheckBox) v.findViewById(R.id.crime_solved);
         mSolvedCheckbox.setChecked(mCrime.isSolved());
