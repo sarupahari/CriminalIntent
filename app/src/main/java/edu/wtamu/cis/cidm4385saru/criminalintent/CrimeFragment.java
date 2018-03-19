@@ -18,6 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 
@@ -29,8 +30,12 @@ public class CrimeFragment extends Fragment{
 
     private static final String ARG_CRIME_ID = "crime_id";
     private static final String DIALOG_DATE = "DialogDate";
+    private static final String DIALOG_TIME = "DialogTime";
+
 
     private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_TIME = 1;
+
 
     private Crime mCrime;
     private EditText mTitleField;
@@ -41,7 +46,6 @@ public class CrimeFragment extends Fragment{
     public static CrimeFragment newInstance (UUID crimeId){
         Bundle args = new Bundle();
         args.putSerializable(ARG_CRIME_ID, crimeId);
-
         CrimeFragment fragment = new CrimeFragment();
         fragment.setArguments(args);
         return fragment;
@@ -93,7 +97,7 @@ public class CrimeFragment extends Fragment{
 
 
         mTimeButton = (Button) v.findViewById(R.id.crime_date);
-        updateDate();
+        updateTime();
         mTimeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -128,6 +132,13 @@ public class CrimeFragment extends Fragment{
         if (requestCode == REQUEST_DATE) {
             Date date = (Date) data
                     .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+//            mCrime.setDate(date);
+//            updateDate();
+            showTimeDialog(date);
+        }
+        if (requestCode == REQUEST_TIME) {
+            Date date = (Date) data
+                    .getSerializableExtra(TimePickerFragment.EXTRA_TIME);
             mCrime.setDate(date);
             updateDate();
         }
@@ -135,5 +146,17 @@ public class CrimeFragment extends Fragment{
 
     private void updateDate() {
         mDateButton.setText(mCrime.getDate().toString());
+    }
+
+    private void updateTime() {
+        mTimeButton.setText(mCrime.getDate().toString());
+    }
+
+    private void showTimeDialog(Date date){
+        FragmentManager fragmentManager = getFragmentManager();
+        TimePickerFragment dialog = TimePickerFragment.newInstance(date);
+
+        dialog.setTargetFragment(CrimeFragment.this, REQUEST_TIME);
+        dialog.show(fragmentManager, DIALOG_TIME);
     }
 }

@@ -24,14 +24,14 @@ public class TimePickerFragment extends DialogFragment {
 
     public static final String EXTRA_TIME = "edu.wtamu.cis.cidm4385saru.criminalintent.time";
 
-    private static final String ARG_DATE = "date";
+    private static final String ARG_TIME = "time";
 
     private TimePicker mTimePicker;
     private Calendar mCalendar;
 
     public static TimePickerFragment newInstance(Date date) {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_DATE, date);
+        args.putSerializable(ARG_TIME, date);
 
         TimePickerFragment fragment = new TimePickerFragment();
         fragment.setArguments(args);
@@ -41,7 +41,7 @@ public class TimePickerFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final Date date = (Date) getArguments().getSerializable(ARG_DATE);
+        final Date date = (Date) getArguments().getSerializable(ARG_TIME);
 
         mCalendar= Calendar.getInstance();
         mCalendar.setTime(date);
