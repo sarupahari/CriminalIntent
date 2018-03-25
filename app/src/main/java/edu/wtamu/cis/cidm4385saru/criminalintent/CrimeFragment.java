@@ -10,6 +10,9 @@ import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -77,6 +80,8 @@ public class CrimeFragment extends Fragment{
             }
         });
 
+
+
         mDateButton = (Button) v.findViewById(R.id.crime_date);
         updateDate();
         mDateButton.setOnClickListener(new View.OnClickListener(){
@@ -102,7 +107,7 @@ public class CrimeFragment extends Fragment{
 
         return v;
     }
-
+    
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) {

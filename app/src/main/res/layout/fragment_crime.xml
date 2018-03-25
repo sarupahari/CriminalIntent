@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="16dp"
     android:orientation="vertical">
 
@@ -33,4 +34,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/crime_solved_label"/>
+    <item
+        android:id="@+id/menu_item_delete_crime"
+        android:icon="@drawable/ic_menu_delete"
+        android:title="@string/delete_crime"/>
 </LinearLayout>
